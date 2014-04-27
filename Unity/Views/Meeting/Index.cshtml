@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Unity.Models.Meetings>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Meetings</h2>
+
+<p>
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+<p style="padding: 0 2% 0 2%; text-align: justify">
+    An NA meeting is where recovering addicts meet regularly to help each other stay clean.
+    Most meetings in Northern Utah are open topic where people share about their experience
+    with addiction as well as their success of recovery. Meetings are a great place to meet
+    new people that have experience with getting and staying clean. Attending meeting on a
+    regular basis is a large part of the Narcotics Anonymous Program. It is said in our
+    literature that "those who keep coming to our meetings regularly stay clean”
+    <br />
+    <br />
+    There are no strings attached to NA. We are not affiliated with any other organizations,
+    we have no initiation fees or dues, no pledges to sign, no promises to make to anyone.
+    We are not connected with any political, religious or law enforcement groups, and are
+    under no surveillance at any time. Anyone may join us, regardless of age, race, sexual
+    identity, creed, religion or lack of religion.
+</p>
+<br />
+<h3>Northern Utah Area Meeting Schedule</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DayofWeek)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MapLink)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayofWeek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+
+                <a href="@Html.DisplayFor(modelItem => item.MapLink)" target="_blank"><img src="~/Content/compass.png" /></a>
+
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>*@
+            @if (Request.IsAuthenticated)
+            {
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MeetingsID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.MeetingsID }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MeetingsID })
+                </td>
+            }
+        </tr>
+    }
+
+</table>

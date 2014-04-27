@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Unity.Models.Announcements>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Announcements</h2>
+
+@*NOTE TO SELF: I commented expiration out because it doesnt
+    need to be seen. But, the details link maybe used in the furture.*@
+
+<p>
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Expiration)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Expiration)
+                </td>*@
+            @if (Request.IsAuthenticated)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AnnouncementsID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id=item.AnnouncementsID }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.AnnouncementsID })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
