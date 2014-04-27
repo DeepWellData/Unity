@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<JustCodeSettings Version="0.0" Timestamp="1f37480d-66c5-4cac-872b-86dfe38dd78f">
+  <IgnoredErrorsAndWarningsSettings xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <IgnoredErrorsAndWarnings Version="2">
+      <FilePath>
+        <FileRelativePath>Unity/Content/bootstrap.css</FileRelativePath>
+        <ProjectRelativePath>Unity/Unity.csproj</ProjectRelativePath>
+        <IgnoredElement>
+          <TextualIdentifier>8955920619622301386</TextualIdentifier>
+        </IgnoredElement>
+      </FilePath>
+      <FilePath>
+        <FileRelativePath>Unity/Content/bootstrap.min.css</FileRelativePath>
+        <ProjectRelativePath>Unity/Unity.csproj</ProjectRelativePath>
+        <IgnoredElement>
+          <TextualIdentifier>15255017624466104006</TextualIdentifier>
+        </IgnoredElement>
+      </FilePath>
+    </IgnoredErrorsAndWarnings>
+  </IgnoredErrorsAndWarningsSettings>
+</JustCodeSettings>

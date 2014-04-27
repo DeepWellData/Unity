@@ -22,7 +22,7 @@ namespace Unity.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "24 hr Phone Line (877)-479-NANA (6262)";
+            ViewBag.Message = "24 hr Phone Line";
 
             return View();
         }

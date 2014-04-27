@@ -6,22 +6,17 @@
 
 <h2>Meetings</h2>
 
-<p>
-    @if (Request.IsAuthenticated)
-    {
-        @Html.ActionLink("Create New", "Create")
-    }
-</p>
+
 <p style="padding: 0 2% 0 2%; text-align: justify">
-    An NA meeting is where recovering addicts meet regularly to help each other stay clean.
+    An N.A. meeting is where recovering addicts meet regularly to help each other stay clean.
     Most meetings in Northern Utah are open topic where people share about their experience
-    with addiction as well as their success of recovery. Meetings are a great place to meet
+    with addiction as well as their success in recovery. Meetings are a great place to meet
     new people that have experience with getting and staying clean. Attending meeting on a
-    regular basis is a large part of the Narcotics Anonymous Program. It is said in our
-    literature that "those who keep coming to our meetings regularly stay clean”
+    regular basis is a large part of the N.A. Program. It is said in our
+    literature that "those who keep coming to our meetings regularly stay clean”.
     <br />
     <br />
-    There are no strings attached to NA. We are not affiliated with any other organizations,
+    There are no strings attached to N.A. We are not affiliated with any other organizations,
     we have no initiation fees or dues, no pledges to sign, no promises to make to anyone.
     We are not connected with any political, religious or law enforcement groups, and are
     under no surveillance at any time. Anyone may join us, regardless of age, race, sexual
@@ -29,6 +24,12 @@
 </p>
 <br />
 <h3>Northern Utah Area Meeting Schedule</h3>
+<p>
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
 <table class="table">
     <tr>
         <th>

@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { style = "width: 300px" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Location)
+                @Html.TextBoxFor(model => model.Location, new { style = "width: 300px" })
                 @Html.ValidationMessageFor(model => model.Location)
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MapLink, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MapLink)
+                @Html.TextBoxFor(model => model.MapLink, new { style = "width: 300px" })
                 @Html.ValidationMessageFor(model => model.MapLink)
             </div>
         </div>
