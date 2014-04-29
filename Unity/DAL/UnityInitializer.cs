@@ -15,11 +15,11 @@ namespace Unity.DAL
         {
             var meetings = new List<Meetings>
             {
-                new Meetings{Name = "Monday winners", Location = "344 e 300 n Logan, UT", MapLink = "", DayofWeek = Days.Monday, Latitude = null, Longitude = null},
-                new Meetings{Name = "Tuesday wild horse", Location = "Church on 400 West 1000 North", MapLink = "", DayofWeek = Days.Tuesday, Latitude = null, Longitude = null},
-                new Meetings{Name = "Wednesday Book Readers", Location = "Ye old Whittier Center", MapLink = "", DayofWeek = Days.Wednesday, Latitude = null, Longitude = null},
-                new Meetings{Name = "Thurday Snoozers", Location = "Your moms place", MapLink = "", DayofWeek = Days.Thursday, Latitude = null, Longitude = null},
-                new Meetings{Name = "Saturday Breakfast Champs", Location = "1000 North 60 West (behind Wallgreens)", MapLink = "", DayofWeek = Days.Saturday, Latitude = null, Longitude = null}
+                new Meetings{Name = "Monday winners", Location = "344 e 300 n Logan, UT", MapLink = "", DayofWeek = Days.Monday, TimeofDay = "7pm"},
+                new Meetings{Name = "Tuesday wild horse", Location = "Church on 400 West 1000 North", MapLink = "", DayofWeek = Days.Tuesday, TimeofDay = "7pm"},
+                new Meetings{Name = "Wednesday Book Readers", Location = "Ye old Whittier Center", MapLink = "", DayofWeek = Days.Wednesday, TimeofDay = "7pm"},
+                new Meetings{Name = "Thurday Snoozers", Location = "Your moms place", MapLink = "", DayofWeek = Days.Thursday, TimeofDay = "7pm"},
+                new Meetings{Name = "Saturday Breakfast Champs", Location = "1000 North 60 West (behind Wallgreens)", MapLink = "", DayofWeek = Days.Saturday, TimeofDay = "7pm"}
             };
 
             meetings.ForEach(m => context.Meetings.Add(m));

@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using Unity.Models;
 using Unity.DAL;
-using Unity.Models;
 
 namespace Unity.Controllers
 {
@@ -44,7 +43,6 @@ namespace Unity.Controllers
         }
 
         // GET: /Meeting/Create
-        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -53,30 +51,21 @@ namespace Unity.Controllers
         // POST: /Meeting/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="MeetingsID,Name,Location,MapLink,DayofWeek,Latitude,Longitude")] Meetings meetings)
+        public ActionResult Create([Bind(Include="MeetingsID,DayofWeek,TimeofDay,Name,Location,MapLink")] Meetings meetings)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Meetings.Add(meetings);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.Meetings.Add(meetings);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists contact your administrator.");
-            }
             return View(meetings);
         }
 
         // GET: /Meeting/Edit/5
-        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -94,29 +83,20 @@ namespace Unity.Controllers
         // POST: /Meeting/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="MeetingsID,Name,Location,MapLink,DayofWeek,Latitude,Longitude")] Meetings meetings)
+        public ActionResult Edit([Bind(Include="MeetingsID,DayofWeek,TimeofDay,Name,Location,MapLink")] Meetings meetings)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Entry(meetings).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (DataException)
-            {
-                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                db.Entry(meetings).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(meetings);
         }
 
         // GET: /Meeting/Delete/5
-        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -132,7 +112,6 @@ namespace Unity.Controllers
         }
 
         // POST: /Meeting/Delete/5
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

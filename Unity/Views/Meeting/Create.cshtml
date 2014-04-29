@@ -19,8 +19,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DayofWeek, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DayofWeek)
+                @Html.TextBoxFor(model => model.DayofWeek, new { style = "width: 300px" })
                 @Html.ValidationMessageFor(model => model.DayofWeek)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeofDay, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.TimeofDay, new { style = "width: 300px" })
+                @Html.ValidationMessageFor(model => model.TimeofDay)
             </div>
         </div>
 
@@ -47,23 +55,6 @@
                 @Html.ValidationMessageFor(model => model.MapLink)
             </div>
         </div>
-
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Latitude)
-                @Html.ValidationMessageFor(model => model.Latitude)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Longitude)
-                @Html.ValidationMessageFor(model => model.Longitude)
-            </div>
-        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
