@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Unity.Models;
-using Unity.DAL;
 
 namespace Unity.Controllers
 {
@@ -18,16 +17,16 @@ namespace Unity.Controllers
         // GET: /Meeting/
         public ActionResult Index()
         {
-            var query = from m in db.Meetings
-                        select m;
+            var meetings = (db.Meetings).ToList();
 
-            //great little sort
-            var dayIndex = new List<string> { "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY" };
-            var sorted = query.ToList().OrderBy(e => dayIndex.IndexOf(e.DayofWeek.ToString().ToUpper()));
-            return View(sorted);
+            var sortedMeetings = from m in meetings
+                                 orderby m.BeginDateTime.DayOfWeek
+                                 select m;
+            return View(sortedMeetings);
         }
 
         // GET: /Meeting/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -43,6 +42,7 @@ namespace Unity.Controllers
         }
 
         // GET: /Meeting/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -51,9 +51,10 @@ namespace Unity.Controllers
         // POST: /Meeting/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="MeetingsID,DayofWeek,TimeofDay,Name,Location,MapLink")] Meetings meetings)
+        public ActionResult Create([Bind(Include="Id,BeginDateTime,Name,Location,MapLink")] Meetings meetings)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +67,7 @@ namespace Unity.Controllers
         }
 
         // GET: /Meeting/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,9 +85,10 @@ namespace Unity.Controllers
         // POST: /Meeting/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="MeetingsID,DayofWeek,TimeofDay,Name,Location,MapLink")] Meetings meetings)
+        public ActionResult Edit([Bind(Include="Id,BeginDateTime,Name,Location,MapLink")] Meetings meetings)
         {
             if (ModelState.IsValid)
             {
@@ -97,6 +100,7 @@ namespace Unity.Controllers
         }
 
         // GET: /Meeting/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +116,7 @@ namespace Unity.Controllers
         }
 
         // POST: /Meeting/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

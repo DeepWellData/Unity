@@ -7,8 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Unity.Models;
-using Unity.DAL;
-
 namespace Unity.Controllers
 {
     public class AnnouncementController : Controller

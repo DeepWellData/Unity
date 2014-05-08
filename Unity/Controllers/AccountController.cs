@@ -16,7 +16,7 @@ namespace Unity.Controllers
     public class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new UnityContext())))
         {
         }
 
@@ -63,14 +63,20 @@ namespace Unity.Controllers
 
         //
         // GET: /Account/Register
+        [Authorize]
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return RedirectToAction("Login");
         }
 
         //
         // POST: /Account/Register
+        [Authorize]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -78,7 +84,7 @@ namespace Unity.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName};
+                var user = new ApplicationUser() { UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -116,6 +122,7 @@ namespace Unity.Controllers
 
         //
         // GET: /Account/Manage
+        [Authorize]
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -131,6 +138,7 @@ namespace Unity.Controllers
 
         //
         // POST: /Account/Manage
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Manage(ManageUserViewModel model)
@@ -182,6 +190,7 @@ namespace Unity.Controllers
 
         //
         // POST: /Account/ExternalLogin
+        [Authorize]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -193,6 +202,7 @@ namespace Unity.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
+        [Authorize]
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -220,6 +230,7 @@ namespace Unity.Controllers
 
         //
         // POST: /Account/LinkLogin
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
@@ -230,6 +241,7 @@ namespace Unity.Controllers
 
         //
         // GET: /Account/LinkLoginCallback
+        [Authorize]
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
@@ -247,6 +259,7 @@ namespace Unity.Controllers
 
         //
         // POST: /Account/ExternalLoginConfirmation
+        [Authorize]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -378,7 +391,8 @@ namespace Unity.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

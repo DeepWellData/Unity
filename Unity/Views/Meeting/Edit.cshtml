@@ -4,32 +4,25 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Meetings</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Meetings</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.MeetingsID)
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DayofWeek, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BeginDateTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DayofWeek, new { style = "width: 300px" })
-                @Html.ValidationMessageFor(model => model.DayofWeek)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TimeofDay, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TimeofDay, new { style = "width: 300px" })
-                @Html.ValidationMessageFor(model => model.TimeofDay)
+                @*@Html.EditorFor(model => model.BeginDateTime)*@
+                @Html.TextBox("BeginDateTime", Request["BeginDateTime"], new { @class = "datefield", style = "width: 300px" })
+                @Html.ValidationMessageFor(model => model.BeginDateTime)
             </div>
         </div>
 
@@ -71,4 +64,17 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var jsDate = new Date(parseInt(@(Model.BeginDateTime.Year)),
+                                        parseInt(@(Model.BeginDateTime.Month)) - 1,
+                                        parseInt(@(Model.BeginDateTime.Day)),
+                                        parseInt(@(Model.BeginDateTime.Hour)),
+                                        parseInt(@(Model.BeginDateTime.Minute)),
+                                        parseInt(@(Model.BeginDateTime.Second)),
+                                        parseInt(@(Model.BeginDateTime.Millisecond)));
+        $(".datefield").datetimepicker({
+            timeFormat: "hh:mm tt"
+        });
+        $(".datefield").datetimepicker('setDate', (jsDate));
+    </script>
 }
