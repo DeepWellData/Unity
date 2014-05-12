@@ -19,8 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BeginDateTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.BeginDateTime, new { @class = "datefield" })*@
-                @Html.TextBox("BeginDateTime", Request["BeginDateTime"], new { @class = "datefield", style = "width: 300px" })
+                @Html.Kendo().DateTimePickerFor(model => model.BeginDateTime)
                 @Html.ValidationMessageFor(model => model.BeginDateTime)
             </div>
         </div>
@@ -69,3 +68,16 @@
         });
     </script>
 }
+<style scoped>
+    .k-datetimepicker
+    {
+        width: 200px;
+    }
+    #to-do {
+        height: 52px;
+        width: 221px;
+        margin: 30px auto;
+        padding: 91px 0 0 188px;
+        background: url('@Url.Content("~/content/web/datepicker/todo.png")') transparent no-repeat 0 0;
+    }
+</style>

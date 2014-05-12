@@ -51,7 +51,7 @@ namespace Unity.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AnnouncementsID,Description,Expiration")] Announcements announcements)
+        public ActionResult Create([Bind(Include = "AnnouncementId,Description,Expiration")] Announcements announcements)
         {
             try
             {
@@ -92,8 +92,9 @@ namespace Unity.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AnnouncementsID,Description,Expiration")] Announcements announcements)
+        public ActionResult Edit([Bind(Include = "AnnouncementId,Description,Expiration")] Announcements announcements)
         {
+
             try
             {
                 if (ModelState.IsValid)

@@ -9,8 +9,9 @@ namespace Unity.Models
 {
     public class Meetings
     {
-        public int Id { get; set; }
-        [Display(Name="Begin Date")]
+        [Key]
+        public int MeetingId { get; set; }
+        [Display(Name = "Begin Date")]
         [Column(TypeName = "DateTime2")]
         public DateTime BeginDateTime { get; set; }
         public String Name { get; set; }

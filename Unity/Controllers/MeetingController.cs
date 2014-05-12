@@ -20,7 +20,7 @@ namespace Unity.Controllers
             var meetings = (db.Meetings).ToList();
 
             var sortedMeetings = from m in meetings
-                                 orderby m.BeginDateTime.DayOfWeek
+                                 orderby m.BeginDateTime.DayOfWeek, m.BeginDateTime.TimeOfDay
                                  select m;
             return View(sortedMeetings);
         }
@@ -54,7 +54,7 @@ namespace Unity.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,BeginDateTime,Name,Location,MapLink")] Meetings meetings)
+        public ActionResult Create([Bind(Include="MeetingId,BeginDateTime,Name,Location,MapLink")] Meetings meetings)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Unity.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,BeginDateTime,Name,Location,MapLink")] Meetings meetings)
+        public ActionResult Edit([Bind(Include="MeetingId,BeginDateTime,Name,Location,MapLink")] Meetings meetings)
         {
             if (ModelState.IsValid)
             {

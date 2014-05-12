@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Meetings";
+    ViewBag.CurrentDayOfWeek = null;
 }
 
 <h2>Meetings</h2>
@@ -33,45 +34,24 @@
     @foreach (var item in Model)
     {
         <tr>
-            @if (Convert.ToInt16(item.BeginDateTime.DayOfWeek) % 2 != 0)
+            @if (ViewBag.CurrentDayOfWeek != item.BeginDateTime.DayOfWeek)
             {
-                <td style="background-color:lightgray">
-                    @item.BeginDateTime.DayOfWeek.ToString() |
-                    @item.BeginDateTime.ToString("hh:mm tt")
+                <td colspan="4" style="background-color:lightgray">
+                    @item.BeginDateTime.DayOfWeek.ToString()
                 </td>
-                <td style="background-color:lightgray">
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td style="background-color:lightgray">
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td style="background-color:lightgray">
-                    <a href="@Html.DisplayFor(modelItem => item.MapLink)" target="_blank">
-                        <img src="~/Content/compass.png" />
-                    </a>
-                </td>
-                if (Request.IsAuthenticated)
-                {
-                    <td style="background-color:lightgray">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>
-                }
             }
             else
             {
                 <td>
-                    @item.BeginDateTime.DayOfWeek.ToString() |
                     @item.BeginDateTime.ToString("hh:mm tt")
                 </td>
-                <td>
+                <td style="width:25%">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Location)
                 </td>
-                <td>
+                <td style="text-align:center">
                     <a href="@Html.DisplayFor(modelItem => item.MapLink)" target="_blank">
                         <img src="~/Content/compass.png" />
                     </a>
@@ -79,13 +59,14 @@
                 if (Request.IsAuthenticated)
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MeetingId }) |
                         @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MeetingId })
                     </td>
                 }
             }
         </tr>
+            ViewBag.CurrentDayOfWeek = item.BeginDateTime.DayOfWeek;
     }
 
 </table>

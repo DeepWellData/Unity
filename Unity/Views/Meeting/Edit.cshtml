@@ -15,13 +15,12 @@
         <h4>Meetings</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.MeetingId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.BeginDateTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.BeginDateTime)*@
-                @Html.TextBox("BeginDateTime", Request["BeginDateTime"], new { @class = "datefield", style = "width: 300px" })
+                @Html.Kendo().DateTimePickerFor(model => model.BeginDateTime)
                 @Html.ValidationMessageFor(model => model.BeginDateTime)
             </div>
         </div>
